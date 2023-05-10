@@ -1,9 +1,13 @@
 import React from 'react'
 
+import LoginImg from '../../assets/login-image.svg'
+import Logo from '../../assets/logo.svg'
+
 import {
   Container,
-  Background,
+  LoginImage,
   ContainerItems,
+  LogoImage,
   Label,
   Input,
   Button,
@@ -13,9 +17,13 @@ import {
 function Login() {
   return (
     <Container>
-      <Background />
+      <LoginImage src={LoginImg} alt="login-image"/>
       <ContainerItems>
-        <img />
+
+        <LogoImage>
+          <img src={Logo} alt="logo-code-burger"/>
+        </LogoImage>
+      
         <h1>Login</h1>
 
         <Label>Email</Label>
@@ -24,9 +32,9 @@ function Login() {
         <Label>Senha</Label>
         <Input />
 
-        <Button>SignIn</Button>
+        <Button>Sign In</Button>
         <SignInLink>
-          Não possui conta? <a>SignUp</a>
+          Não possui conta? <a>Sign Up</a>
         </SignInLink>
       </ContainerItems>
     </Container>
