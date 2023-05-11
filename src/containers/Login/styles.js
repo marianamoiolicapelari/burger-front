@@ -23,16 +23,21 @@ export const ContainerItems = styled.div`
     border-radius: 0 10px 10px 0;
     height: 70%;
     padding: 35px 45px;
-    
-      h1 {
-      font-style: normal;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 28px;
-      color: #FFFFFF;
-      text-align: center;
-      margin-top: 40px;
-    }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1 {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 28px;
+            color: #FFFFFF;
+            text-align: center;
+            margin-top: 40px;
+        }
 
 `
 
