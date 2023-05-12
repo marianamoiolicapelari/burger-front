@@ -1,6 +1,9 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
 
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
+
 import LoginImg from '../../assets/login-image.svg'
 import Logo from '../../assets/logo.svg'
 
@@ -16,7 +19,22 @@ import {
 } from './styles'
 
 function Login() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const schema = Yup.object().shape({
+    email: Yup.string()
+    .email('Digite um e-mail válido')
+    .required('O e-mail é obrigatório'),
+    password: Yup.string()
+    .required('A senha é obrigatória')
+    .min(6, 'A senha deve ter no mínimo 6 dígitos')
+  })
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(schema)
+  })
 
   const onSubmit = data => console.log(data);
 
@@ -31,12 +49,14 @@ function Login() {
 
         <h1>Login</h1>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Label>Email</Label>
-          <Input type="email" {...register("email")}/>
+          <Input type="email" {...register("email")} />
+          <p>{errors.email?.message}</p>
 
           <Label>Senha</Label>
-          <Input type="password" {...register("password")}/>
+          <Input type="password" {...register("password")} />
+          <p>{errors.password?.message}</p>
 
           <Button type="submit">Sign In</Button>
         </form>
