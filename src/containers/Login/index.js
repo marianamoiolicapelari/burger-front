@@ -15,17 +15,18 @@ import {
   Label,
   Input,
   Button,
-  SignInLink
+  SignInLink,
+  ErrorMessage
 } from './styles'
 
 function Login() {
   const schema = Yup.object().shape({
     email: Yup.string()
-    .email('Digite um e-mail válido')
-    .required('O e-mail é obrigatório'),
+      .email('Digite um e-mail válido')
+      .required('O e-mail é obrigatório'),
     password: Yup.string()
-    .required('A senha é obrigatória')
-    .min(6, 'A senha deve ter no mínimo 6 dígitos')
+      .required('A senha é obrigatória')
+      .min(6, 'A senha deve ter no mínimo 6 dígitos')
   })
 
   const {
@@ -51,12 +52,20 @@ function Login() {
 
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Label>Email</Label>
-          <Input type="email" {...register("email")} />
-          <p>{errors.email?.message}</p>
+          <Input
+            type="email"
+            {...register("email")}
+            error={errors.email?.message}
+          />
+          <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
           <Label>Senha</Label>
-          <Input type="password" {...register("password")} />
-          <p>{errors.password?.message}</p>
+          <Input
+            type="password"
+            {...register("password")}
+            error={errors.password?.message}
+          />
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
           <Button type="submit">Sign In</Button>
         </form>
