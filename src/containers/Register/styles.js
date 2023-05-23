@@ -10,7 +10,7 @@ export const Container = styled.div`
     background: url('${BackgroundImage}');
 `
 
-export const LoginImage = styled.img`
+export const RegisterImage = styled.img`
     height: 80%;
 `
 
@@ -27,17 +27,16 @@ export const ContainerItems = styled.div`
         form {
             display: flex;
             flex-direction: column;
-            padding-bottom: 15px;
         }
         
         h1 {
             font-style: normal;
             font-weight: 500;
             font-size: 20px;
-            line-height: 28px;
+            line-height: 22px;
             color: #FFFFFF;
             text-align: center;
-            margin-top: 30px;
+            margin-top: 5px;
         }
 
 `
@@ -59,7 +58,7 @@ export const Label = styled.p`
     font-size: 12px;
     line-height: 14px;
     color: #FFFFFF;
-    margin-top: 15px;
+    margin-top: ${props => (props.error ? '5px' : '10px')};
     margin-bottom: 5px;
 `
 
