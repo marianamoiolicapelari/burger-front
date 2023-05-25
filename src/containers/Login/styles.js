@@ -69,7 +69,7 @@ export const Input = styled.input`
     background: #FFFFFF;
     box-shadow: 3px 3px 10px rgba(75, 144, 226, 0.19);
     border-radius: 5px;
-    border: ${props => (props.error ? '2px solid #cc1717' : 'none')};
+    border: ${props => (props.error ? '2px solid #cb1717' : 'none')};
     padding-left: 10px;
 `
 
