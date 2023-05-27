@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
+import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
@@ -44,71 +45,84 @@ function Register() {
   })
 
   const onSubmit = async clientData => {
-    const response = await api.post('users', {
-      name: clientData.name,
-      email: clientData.email,
-      password: clientData.password
-    })
+    try {
+      const { status } = await api.post('users', {
+        name: clientData.name,
+        email: clientData.email,
+        password: clientData.password
+      },
+        { validateStatus: () => true }
+      )
 
-    console.log(response)
-  }
+      if (status === 201 || status === 200) {
+        toast.success('Cadastro criado com sucesso!')
+      }
+      else if (status === 409) {
+        toast.error('E-mail já cadastrado! Faça login para continuar')
+      } else {
+        throw new Error()
+      }
+      } catch (err) {
+        toast.error('Falha no sistema! Tente novamente')
+      }
+    }
 
   return (
-    <Container>
-      <RegisterImage src={RegisterImg} alt="register-image" />
-      <ContainerItems>
+      <Container>
+        <RegisterImage src={RegisterImg} alt="register-image" />
+        <ContainerItems>
 
-        <LogoImage>
-          <img src={Logo} alt="logo-code-burger" />
-        </LogoImage>
+          <LogoImage>
+            <img src={Logo} alt="logo-code-burger" />
+          </LogoImage>
 
-        <h1>Cadastre-se</h1>
+          <h1>Cadastre-se</h1>
 
-        <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <Label error={errors.name?.message}>Nome</Label>
-          <Input
-            type="name"
-            {...register("name")}
-            error={errors.name?.message}
-          />
-          <ErrorMessage>{errors.name?.message}</ErrorMessage>
-         
-          <Label error={errors.email?.message}>Email</Label>
-          <Input
-            type="email"
-            {...register("email")}
-            error={errors.email?.message}
-          />
-          <ErrorMessage>{errors.email?.message}</ErrorMessage>
+          <form noValidate onSubmit={handleSubmit(onSubmit)}>
+            <Label error={errors.name?.message}>Nome</Label>
+            <Input
+              type="name"
+              {...register("name")}
+              error={errors.name?.message}
+            />
+            <ErrorMessage>{errors.name?.message}</ErrorMessage>
 
-          <Label error={errors.password?.message}>Senha</Label>
-          <Input
-            type="password"
-            {...register("password")}
-            error={errors.password?.message}
-          />
-          <ErrorMessage>{errors.password?.message}</ErrorMessage>
+            <Label error={errors.email?.message}>Email</Label>
+            <Input
+              type="email"
+              {...register("email")}
+              error={errors.email?.message}
+            />
+            <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
-          <Label error={errors.confirmPassword?.message}>Confirmar Senha</Label>
-          <Input
-            type="password"
-            {...register("confirmPassword")}
-            error={errors.confirmPassword?.message}
-          />
-          <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
+            <Label error={errors.password?.message}>Senha</Label>
+            <Input
+              type="password"
+              {...register("password")}
+              error={errors.password?.message}
+            />
+            <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Button type="submit" style={{
-            marginTop: 25,
-            marginBottom: 15
-          }}>Sign Up</Button>
-        </form>
+            <Label error={errors.confirmPassword?.message}>Confirmar Senha</Label>
+            <Input
+              type="password"
+              {...register("confirmPassword")}
+              error={errors.confirmPassword?.message}
+            />
+            <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
 
-        <SignInLink>
-          Já possui conta? <a>Sign In</a>
-        </SignInLink>
-      </ContainerItems>
-    </Container>
-  )
-}
+            <Button type="submit" style={{
+              marginTop: 25,
+              marginBottom: 15
+            }}>Sign Up</Button>
+          </form>
 
-export default Register
+          <SignInLink>
+            Já possui conta? <a>Sign In</a>
+          </SignInLink>
+        </ContainerItems>
+      </Container>
+    )
+  }
+
+  export default Register
