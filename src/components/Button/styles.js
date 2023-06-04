@@ -13,6 +13,7 @@ export const ContainerButton = styled.button`
     line-height: 24px;
     text-align: center;
     color: #EEEEEE;
+    color: #ff0000;
     padding: 5px 0;
     
     &:hover {
