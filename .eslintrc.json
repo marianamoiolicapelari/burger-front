@@ -6,8 +6,8 @@
     "extends": [
         "plugin:react/recommended",
         "standard",
-        "plugin:react-hooks/recommended",
-        "plugin:prettier/recomended"
+        "plugin:react-hooks/recommended"
+        // "plugin:prettier/recomended"
     ],
     "parserOptions": {
         "ecmaFeatures": {

@@ -26,7 +26,7 @@ import {
 function Login() {
   const user = useUser()
 
-  console.log(users)
+  console.log(user)
 
   const schema = Yup.object().shape({
     email: Yup.string()
