@@ -26,8 +26,6 @@ import {
 function Login() {
   const user = useUser()
 
-  console.log(user)
-
   const schema = Yup.object().shape({
     email: Yup.string()
       .email('Digite um e-mail válido')
