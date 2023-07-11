@@ -1,30 +1,32 @@
-import React, { createContext, useContext } from "react"
-
 import PropTypes from 'prop-types'
+import { createContext, useContext, useState } from 'react'
 
 const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
-    const user = { name: 'Mariana', age: 38 }
+  const [userData, setUserData] = useState({})
 
-    return (
-        <UserContext.Provider value={{ user }}>
-            {children}
-        </UserContext.Provider>
-    )
+  const putUserData = userInfo => {
+    setUserData(userInfo)
+  }
+
+  return (
+    <UserContext.Provider value={{ putUserData, userData }}>
+      {children}
+    </UserContext.Provider>
+  )
 }
 
 export const useUser = () => {
-    const context = useContext(UserContext)
+  const context = useContext(UserContext)
 
-    if (!context) {
-        throw new Error("useUser must be used with UserContext")
-    }
+  if (!context) {
+    throw new Error('useUser must be used with UserContext')
+  }
 
-    return context
+  return context
 }
 
-
 UserProvider.propTypes = {
-    children: PropTypes.node
+  children: PropTypes.node
 }

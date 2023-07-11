@@ -1,17 +1,13 @@
-import React from 'react'
-import { useForm } from "react-hook-form"
-import { toast } from 'react-toastify'
-
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
-import { useUser } from '../../hooks/UserContext'
-
-import Button from '../../components/Button'
-import api from '../../services/api.js'
 import LoginImg from '../../assets/login-image.svg'
 import Logo from '../../assets/logo.svg'
-
+import Button from '../../components/Button'
+import { useUser } from '../../hooks/UserContext'
+import api from '../../services/api.js'
 import {
   Container,
   LoginImage,
@@ -24,7 +20,7 @@ import {
 } from './styles'
 
 function Login() {
-  const user = useUser()
+  const { putUserData, userData } = useUser()
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -44,29 +40,25 @@ function Login() {
   })
 
   const onSubmit = async clientData => {
-    const response = await toast.promise(
+    const { data } = await toast.promise(
       api.post('sessions', {
         email: clientData.email,
         password: clientData.password
       }),
       {
-
         pending: 'Verificando seus dados',
         success: 'Seja bem vindo(a)',
         error: 'Verifique seu e-mail e senha 🤯'
-
       }
     )
-
-    console.log(response)
+    putUserData(data)
+    console.log(userData)
   }
-
 
   return (
     <Container>
       <LoginImage src={LoginImg} alt="login-image" />
       <ContainerItems>
-
         <LogoImage>
           <img src={Logo} alt="logo-code-burger" />
         </LogoImage>
@@ -77,7 +69,7 @@ function Login() {
           <Label>Email</Label>
           <Input
             type="email"
-            {...register("email")}
+            {...register('email')}
             error={errors.email?.message}
           />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
@@ -85,15 +77,20 @@ function Login() {
           <Label>Senha</Label>
           <Input
             type="password"
-            {...register("password")}
+            {...register('password')}
             error={errors.password?.message}
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Button type="submit" style={{
-            marginTop: 55,
-            marginBottom: 15
-          }}>Sign In</Button>
+          <Button
+            type="submit"
+            style={{
+              marginTop: 55,
+              marginBottom: 15
+            }}
+          >
+            Sign In
+          </Button>
         </form>
 
         <SignInLink>

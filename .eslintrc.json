@@ -6,13 +6,11 @@
     "extends": [
         "plugin:react/recommended",
         "standard",
-        "plugin:react-hooks/recommended"
-        // "plugin:prettier/recomended"
+        "plugin:react-hooks/recommended",
+        "plugin:prettier/recommended"
     ],
+    "overrides": [],
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
@@ -23,16 +21,21 @@
         "prettier"
     ],
     "rules": {
-        "prettier/prettier": "error",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "off",
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
-        "no-unused-vars": "warn",
         "import-helpers/order-imports": [
             "warn",
             {
-                "newlinesBetween": "always", // new line between groups
+                "newlinesBetween": "always",
                 "groups": [
-                    "/^react/",
                     "module",
                     "/^@shared/",
                     [
