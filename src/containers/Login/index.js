@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
@@ -20,7 +21,7 @@ import {
 } from './styles'
 
 function Login() {
-  const { putUserData, userData } = useUser()
+  const { putUserData } = useUser()
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -52,7 +53,6 @@ function Login() {
       }
     )
     putUserData(data)
-    console.log(userData)
   }
 
   return (
@@ -94,7 +94,10 @@ function Login() {
         </form>
 
         <SignInLink>
-          Não possui conta? <a>Sign Up</a>
+          Não possui conta?{' '}
+          <Link style={{ color: 'white' }} to="/register">
+            Sign Up
+          </Link>
         </SignInLink>
       </ContainerItems>
     </Container>
