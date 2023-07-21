@@ -1,14 +1,13 @@
 import HomeLogo from '../../assets/home-logo.svg'
-import CategoryCarousel from '../../components/CategoryCarousel'
+import { CategoryCarousel, OffersCarousel } from '../../components'
 import { Container, HomeImg } from './styles'
 
-function Home() {
+export function Home() {
   return (
     <Container>
       <HomeImg src={HomeLogo} alt="logo-home" />
       <CategoryCarousel />
+      <OffersCarousel />
     </Container>
   )
 }
-
-export default Home
