@@ -14,7 +14,7 @@ import {
 } from './styles'
 
 export function Header() {
-  const { logout } = useUser()
+  const { logout, userData } = useUser()
   const navigate = useNavigate()
   const location = useLocation()
   const { pathname } = location
@@ -48,7 +48,7 @@ export function Header() {
           <img src={Person} alt="logo-pessoa" />
         </PageLink>
         <ContainerText>
-          <p>Olá, Mariana</p>
+          <p>Olá, {userData.name}</p>
           <PageLinkExit onClick={logoutUser}>Sair</PageLinkExit>
         </ContainerText>
       </ContainerRight>
