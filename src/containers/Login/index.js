@@ -56,7 +56,11 @@ export function Login() {
     putUserData(data)
 
     setTimeout(() => {
-      navigate('/')
+      if (data.admin) {
+        navigate('/pedidos')
+      } else {
+        navigate('/')
+      }
     }, 1500)
   }
 
