@@ -15,8 +15,7 @@ import * as React from 'react'
 import api from '../../../services/api'
 import status from './order-status'
 import { ProductImg, ReactSelectStyle } from './styles'
-
-function Row({ row }) {
+function Row({ row, orders, setOrders }) {
   const [open, setOpen] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
 
@@ -24,6 +23,10 @@ function Row({ row }) {
     setIsLoading(true)
     try {
       await api.put(`orders/${id}`, { status })
+      const newOrders = orders.map(order => {
+        return order._id === id ? { ...order, status } : order
+      })
+      setOrders(newOrders)
     } catch (err) {
       console.error(err)
     } finally {
@@ -50,7 +53,7 @@ function Row({ row }) {
         <TableCell>{row.date}</TableCell>
         <TableCell>
           <ReactSelectStyle
-            options={status}
+            options={status.filter(sts => sts.value !== 'Todos')}
             menuPortalTarget={document.body}
             placeholder="Status"
             defaultValue={
@@ -105,6 +108,8 @@ function Row({ row }) {
 }
 
 Row.propTypes = {
+  orders: PropTypes.array,
+  setOrders: PropTypes.func,
   row: PropTypes.shape({
     name: PropTypes.string.isRequired,
     orderId: PropTypes.string.isRequired,
