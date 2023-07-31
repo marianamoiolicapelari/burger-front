@@ -1,9 +1,11 @@
+import { SideMenuAdmin } from '../../components'
 import Orders from './Orders'
 import { Container } from './styles'
 
 export function Admin() {
   return (
     <Container>
+      <SideMenuAdmin></SideMenuAdmin>
       <Orders />
     </Container>
   )
