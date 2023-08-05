@@ -8,7 +8,6 @@ import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 
 import { ErrorMessage } from '../../../components'
-import paths from '../../../constants/paths'
 import api from '../../../services/api'
 import {
   Container,
@@ -20,7 +19,7 @@ import {
 } from './styles'
 
 export function EditProduct() {
-  const [fileName, setFilename] = useState(null)
+  const [fileName, setFileName] = useState(null)
   const [categories, setCategories] = useState([])
   const navigate = useNavigate()
   const location = useLocation()
@@ -63,7 +62,7 @@ export function EditProduct() {
     )
 
     setTimeout(() => {
-      navigate(paths.Products)
+      navigate('/listar-produtos')
     }, 2000)
   }
 
@@ -112,7 +111,7 @@ export function EditProduct() {
               accept="image/png, image/jpeg"
               {...register('file')}
               onChange={value => {
-                setFilename(value.target.files[0]?.name)
+                setFileName(value.target.files[0]?.name)
               }}
             />
           </LabelUpload>

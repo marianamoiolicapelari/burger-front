@@ -103,7 +103,7 @@ export function Login() {
 
         <SignInLink>
           Não possui conta?{' '}
-          <Link style={{ color: 'white' }} to="/register">
+          <Link style={{ color: 'white' }} to="/cadastro">
             Sign Up
           </Link>
         </SignInLink>
